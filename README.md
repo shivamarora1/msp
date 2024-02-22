@@ -14,3 +14,10 @@ API integration.
 
 ### Version: 0.03
 1. Finetune frontend for better results.
+
+
+## How to start MilVus:
+`bash standalone_embed.sh start`
+
+## How to stop MilVus:
+`bash standalone_embed.sh stop`
