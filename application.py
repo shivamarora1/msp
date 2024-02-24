@@ -8,7 +8,7 @@ app = Flask(__name__)
 def welcome_page():
     # ! render front end template
     app.logger.debug("received request...")
-    return render_template("index.html", name="Shilpa")
+    return render_template("search.html")
 
 
 @app.get("/search/<query>")
