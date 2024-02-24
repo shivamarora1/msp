@@ -31,3 +31,8 @@ Backend:
 1. Api to search movie. No auth needed for now. that will return the list of movies. 
 
 Follow format mentioned in https://flask.palletsprojects.com/en/3.0.x/tutorial/layout/
+https://flask.palletsprojects.com/en/3.0.x/errorhandling/
+https://milvus.io/docs/integrate_with_sentencetransformers.md
+
+## Good to have:
+1. Authentication.
