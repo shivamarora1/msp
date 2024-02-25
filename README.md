@@ -10,19 +10,20 @@ Result: Terror in the Aisles
 ```
 
 ### Architecture
-**Milvus**: Vector database to store embedding vectors. <br>
-**all-MiniLM-L6-v2**: Sentence model used to map sentence and paragraphs in 384 dimensional vector space. This model converts normal sentence to vector embeddings.
+![msp_architecture](https://github.com/shivamarora1/msp/assets/28146775/9066f40a-09aa-49ea-9751-2dffbc03dfce)
 
-<Diagram will go here>
+[**Milvus**](https://milvus.io/): Vector database to store embedding vectors. <br>
+[**all-MiniLM-L6-v2**](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2): Sentence model used to map sentence and paragraphs in 384 dimensional vector space. This model converts normal sentence to vector embeddings.
 
-### Steps to run
+### Steps to run project
 1. Run `bash standalone_embed.sh start` to host Milvus database in local.
 2. Set `MILVUS_PORT`, `MILVUS_HOST` in `.env` file with appropriate value.
-3. Movies dataset having 
+3. Movies dataset
 ```
 Release Year | Title | Origin/Ethnicity | Director | Cast | Genre | Wiki Page | Plot
 ```
-columns is stored in `data/plots.csv`.<br>
+columns is stored in `data/plots.csv`.
+
 4. Set up virtual environment.
 ```
 python3 -m venv .venv
@@ -32,7 +33,7 @@ source .venv/bin/activate
 ```
 pip install -r requirements
 ```
-6. Create and Store movies plot embeddings
+6. Create and store movies plot embeddings
 ```
 python create_embeddings.py
 ``` 
