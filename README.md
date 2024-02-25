@@ -10,22 +10,50 @@ Result: Terror in the Aisles
 ```
 
 ### Architecture
+**Milvus**: Vector database to store embedding vectors. <br>
+**all-MiniLM-L6-v2**: Sentence model used to map sentence and paragraphs in 384 dimensional vector space. This model converts normal sentence to vector embeddings.
+
 <Diagram will go here>
 
 ### Steps to run
+1. Run `bash standalone_embed.sh start` to host Milvus database in local.
+2. Set `MILVUS_PORT`, `MILVUS_HOST` in `.env` file with appropriate value.
+3. Movies dataset having 
+```
+Release Year | Title | Origin/Ethnicity | Director | Cast | Genre | Wiki Page | Plot
+```
+columns is stored in `data/plots.csv`.<br>
+4. Set up virtual environment.
+```
+python3 -m venv .venv
+source .venv/bin/activate
+```
+5. Install required dependencies
+```
+pip install -r requirements
+```
+6. Create and Store movies plot embeddings
+```
+python create_embeddings.py
+``` 
+7. Run application
+```
+make run-debug
+```
+8. Application running in http://127.0.0.1:3001
 
-### Demo video
 
-## How to start MilVus:
-`bash standalone_embed.sh start`
-
-## How to stop MilVus:
-`bash standalone_embed.sh stop`
+### Demo
 
 
-Follow format mentioned in https://flask.palletsprojects.com/en/3.0.x/tutorial/layout/
-https://flask.palletsprojects.com/en/3.0.x/errorhandling/
-https://milvus.io/docs/integrate_with_sentencetransformers.md
+Tech stack used.
+Creating embeddings, searching embeddings
+Write note of it.
+
+vector field `embedding` used to search collection. `title` field is returned when search is complete.
+max number of record returned `top_k` are 3 .
 
 ## Todo:
 Check similarity algorithm.
+Images not available
+
