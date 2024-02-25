@@ -11,13 +11,18 @@ document.getElementById("search-btn").addEventListener("click", function () {
       console.log(data);
       const itemContainer = document.getElementById("item-container");
       itemContainer.innerHTML = "";
-      data.forEach((obj) => {
-        const item = document.createElement("div");
-        card.className = "item";
-        card.innerHTML = `<img src="https://dummyimage.com/600x400/">
-            <div class="title">${obj.title}</div>`;
-        cardContainer.appendChild(card);
-      });
+      if (searchText in data) {
+        list = data[searchText];
+        list.forEach((obj) => {
+          const item = document.createElement("div");
+          item.className = "item";
+          item.innerHTML = `<img src="https://dummyimage.com/600x400/">
+                <div class="title">${obj.title}</div>`;
+          itemContainer.appendChild(item);
+        });
+      } else {
+        // ! show some error
+      }
     })
     .catch((error) => console.error("Error:", error));
 });
