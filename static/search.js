@@ -1,12 +1,45 @@
+function showAlert(msg) {
+  const ele = document.getElementById("alert");
+  ele.innerHTML = msg;
+  ele.classList.remove("d-none");
+}
+
+function hideAlert() {
+  const ele = document.getElementById("alert");
+  ele.innerHTML = "";
+  ele.classList.add("d-none");
+}
+
+function searching() {
+  const btn = document.getElementById("search-btn");
+  btn.value = "Searching...";
+
+  const txtBox = document.getElementById("text-box");
+  txtBox.setAttribute("disabled", "true");
+}
+
+function searchingComplete() {
+  const btn = document.getElementById("search-btn");
+  btn.value = "Search";
+
+  const txtBox = document.getElementById("text-box");
+  txtBox.removeAttribute("disabled");
+}
+
 document.getElementById("search-btn").addEventListener("click", function () {
   const searchText = document.getElementById("text-box").value;
+  searching();
+  hideAlert();
   fetch(`/search/${searchText}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   })
-    .then((response) => response.json())
+    .then((response) => {
+      searchingComplete();
+      return response.json();
+    })
     .then((data) => {
       console.log(data);
       const itemContainer = document.getElementById("item-container");
@@ -14,15 +47,24 @@ document.getElementById("search-btn").addEventListener("click", function () {
       if (searchText in data) {
         list = data[searchText];
         list.forEach((obj) => {
-          const item = document.createElement("div");
-          item.className = "item";
-          item.innerHTML = `<img src="https://dummyimage.com/600x400/">
-                <div class="title">${obj.title}</div>`;
-          itemContainer.appendChild(item);
+          const col = document.createElement("div");
+          col.className = "col";
+
+          const card = document.createElement("div");
+          card.className = "card mt-3";
+          card.innerHTML = `<h5 class="card-header">
+          ${obj.title}
+      </h5>
+      <img src="https://dummyimage.com/600x400/" class="card-img-bottom">`;
+          col.appendChild(card);
+          itemContainer.appendChild(col);
         });
       } else {
-        // ! show some error
+        showAlert("no result found...");
       }
     })
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => {
+      console.error("Error:", error);
+      showAlert(error);
+    });
 });

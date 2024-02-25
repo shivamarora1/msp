@@ -6,8 +6,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def welcome_page():
-    # ! render front end template
-    app.logger.debug("received request...")
     return render_template("search.html")
 
 
