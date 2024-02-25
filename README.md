@@ -1,9 +1,20 @@
-# MSP
-Movie Search by Persona
+**MSP**, or Movie Search by Plot, employs semantic-based search techniques to identify relevant movies. Unlike traditional search algorithms that rely on similarity measures, MSP understands the plot of a story, allowing users to find titles that match their actual interests.
 
-### Version: 0.03
-1. Finetune frontend for better results.
+Let's see some example:
+```
+Input: Adventure of scientist in his regular life
+Result: The Creeping Flesh
 
+Input: Horror love story
+Result: Terror in the Aisles
+```
+
+### Architecture
+<Diagram will go here>
+
+### Steps to run
+
+### Demo video
 
 ## How to start MilVus:
 `bash standalone_embed.sh start`
@@ -16,5 +27,5 @@ Follow format mentioned in https://flask.palletsprojects.com/en/3.0.x/tutorial/l
 https://flask.palletsprojects.com/en/3.0.x/errorhandling/
 https://milvus.io/docs/integrate_with_sentencetransformers.md
 
-## Good to have:
-1. Authentication.
+## Todo:
+Check similarity algorithm.
