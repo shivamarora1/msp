@@ -16,7 +16,7 @@ collection.load()
 def search_data(data: list[str]):
     search_embeddings = utils.generate_embeddings(data)
     resp = collection.search(data=search_embeddings, anns_field="embedding", param={
-    }, limit=TOP_K, output_fields=['title'])
+                             'metric_type': 'L2', 'params': {'nprobe': 10}}, limit=TOP_K, output_fields=['title'])
     result = {}
     for i, hits in enumerate(resp):
         result[data[i]] = [{"title": hit.entity.get(
