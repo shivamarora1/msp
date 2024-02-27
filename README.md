@@ -45,6 +45,8 @@ make run-debug
 
 
 ### Demo
+![recording](https://github.com/shivamarora1/msp/assets/28146775/db1a3c7e-71b7-46db-9494-2d990883f4f3)
+
 
 
 Tech stack used.
