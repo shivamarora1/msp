@@ -47,16 +47,5 @@ make run-debug
 ### Demo
 ![recording](https://github.com/shivamarora1/msp/assets/28146775/db1a3c7e-71b7-46db-9494-2d990883f4f3)
 
-
-
-Tech stack used.
-Creating embeddings, searching embeddings
-Write note of it.
-
-vector field `embedding` used to search collection. `title` field is returned when search is complete.
-max number of record returned `top_k` are 3 .
-
-## Todo:
-Check similarity algorithm.
-Images not available
-
+*Since dataset does not contain image data, Image thumbnail would not be available.
+Follow more such content: https://medium.com/@shivamarora1
