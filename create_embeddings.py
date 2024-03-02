@@ -13,9 +13,9 @@ def csv_load(file):
     with open(file, newline='') as f:
         reader = csv.reader(f, delimiter=',')
         for row in reader:
-            if '' in (row[1], row[7]):
+            if '' in (row[1], row[7], row[8]):
                 continue
-            yield (row[1], row[7])
+            yield (row[1], row[7], row[8])
 
 
 MILVUS_PORT = os.getenv("MILVUS_PORT")
@@ -26,11 +26,15 @@ connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 COLLECTION_NAME = "movies_db"
 DIMENSION = 384
 
+if utility.has_collection(collection_name=COLLECTION_NAME):
+    utility.drop_collection(collection_name=COLLECTION_NAME)
+
 fields = [
     FieldSchema(name='id', dtype=DataType.INT64, is_primary=True,
                 auto_id=True),  # id is auto=increment
     FieldSchema(name='title', dtype=DataType.VARCHAR, max_length=200),
-    FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
+    FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION),
+    FieldSchema(name='image', dtype=DataType.VARCHAR, max_length=500),
 ]
 schema = CollectionSchema(fields=fields)
 collection = Collection(name=COLLECTION_NAME, schema=schema)
@@ -45,16 +49,17 @@ collection.load()
 
 BATCH_SIZE = 128
 
-data_batch = [[], []]
+data_batch = [[], [], []]
 
 count = 0
 
-for title, plot in csv_load('plots.csv'):
+for title, plot, image in csv_load('data/plots.csv'):
     data_batch[0].append(title)
     data_batch[1].append(plot)
+    data_batch[2].append(image)
     if len(data_batch[0]) % BATCH_SIZE == 0:
         db.insert_data(data_batch)
-        data_batch = [[], []]
+        data_batch = [[], [], []]
         print(f"\ninserted... {count} movies")
     count += 1
 

@@ -41,7 +41,6 @@ document.getElementById("search-btn").addEventListener("click", function () {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       const itemContainer = document.getElementById("item-container");
       itemContainer.innerHTML = "";
       if (searchText in data) {
@@ -55,7 +54,7 @@ document.getElementById("search-btn").addEventListener("click", function () {
           card.innerHTML = `<h5 class="card-header">
           ${obj.title}
       </h5>
-      <img src="https://dummyimage.com/600x400/" class="card-img-bottom">`;
+      <img src="https://${obj.image}" class="card-img-bottom">`;
           col.appendChild(card);
           itemContainer.appendChild(col);
         });
