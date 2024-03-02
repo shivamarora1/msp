@@ -20,9 +20,9 @@ Result: Terror in the Aisles
 2. Set `MILVUS_PORT`, `MILVUS_HOST` in `.env` file with appropriate value.
 3. Movies dataset
 ```
-Release Year | Title | Origin/Ethnicity | Director | Cast | Genre | Wiki Page | Plot
+Release Year | Title | Origin/Ethnicity | Director | Cast | Genre | Wiki Page | Plot | Image
 ```
-columns is stored in `data/plots.csv`.
+You can download data set from [Hugging face](https://huggingface.co/datasets/Coder-Dragon/wikipedia-movies).
 
 4. Set up virtual environment.
 ```
