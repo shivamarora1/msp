@@ -45,7 +45,7 @@ make run-debug
 
 
 ### Demo
-![recording](https://github.com/shivamarora1/msp/assets/28146775/db1a3c7e-71b7-46db-9494-2d990883f4f3)
+![recording](https://github.com/shivamarora1/msp/assets/28146775/128e700f-7243-450b-b70c-324fe2d49d5d)
 
-*Since dataset does not contain image data, Image thumbnail would not be available.
-Follow more such content: https://medium.com/@shivamarora1
+
+Follow more such content 👉 : https://medium.com/@shivamarora1
