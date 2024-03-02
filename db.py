@@ -3,7 +3,7 @@ from pymilvus import (connections, Collection)
 
 import utils
 
-TOP_K = 3
+TOP_K = 10
 COLLECTION_NAME = "movies_db"
 
 connections.connect(host=os.getenv("MILVUS_HOST"),
