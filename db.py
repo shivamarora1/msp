@@ -16,19 +16,20 @@ collection.load()
 def search_data(data: list[str]):
     search_embeddings = utils.generate_embeddings(data)
     resp = collection.search(data=search_embeddings, anns_field="embedding", param={
-                             'metric_type': 'L2', 'params': {'nprobe': 10}}, limit=TOP_K, output_fields=['title'])
+                             'metric_type': 'L2', 'params': {'nprobe': 10}}, limit=TOP_K, output_fields=['title', 'image'])
     result = {}
     for i, hits in enumerate(resp):
         result[data[i]] = [{"title": hit.entity.get(
-            'title'), "match": hit.distance} for hit in hits]
+            'title'), "image": hit.entity.get(
+            'image'), "match": hit.distance} for hit in hits]
     return result
 
 
-# * data: [["title_1","title_2"],["plot_1","plot_2"]]
 def insert_data(data):
     embeddings = utils.generate_embeddings(data[1])
     ins = [
         data[0],
-        embeddings
+        embeddings,
+        data[2],
     ]
     collection.insert(ins)
