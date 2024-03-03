@@ -10,6 +10,8 @@ Result: Terror in the Aisles
 ```
 
 ### 👉 Live [Demo](https://movie-search-plot.streamlit.app/)
+![recording](https://github.com/shivamarora1/msp/assets/28146775/2062628c-834d-4c07-af0b-090be4d2d8c0)
+
 
 ### Architecture
 ![msp_architecture](https://github.com/shivamarora1/msp/assets/28146775/9066f40a-09aa-49ea-9751-2dffbc03dfce)
@@ -44,11 +46,5 @@ python create_embeddings.py
 make run-streamlit-app
 ```
 8. Streamlit app should be open in browser
-
-
-### Demo
-![recording](https://github.com/shivamarora1/msp/assets/28146775/2062628c-834d-4c07-af0b-090be4d2d8c0)
-
-
 
 Follow more such content 👉 : https://medium.com/@shivamarora1
