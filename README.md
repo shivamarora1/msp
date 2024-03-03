@@ -12,9 +12,8 @@ Result: Terror in the Aisles
 ### 👉 Live [Demo](https://movie-search-plot.streamlit.app/)
 ![recording](https://github.com/shivamarora1/msp/assets/28146775/2062628c-834d-4c07-af0b-090be4d2d8c0)
 
-
 ### Architecture
-![msp_architecture](https://github.com/shivamarora1/msp/assets/28146775/9066f40a-09aa-49ea-9751-2dffbc03dfce)
+![msp_architecture drawio (1)](https://github.com/shivamarora1/msp/assets/28146775/51f3ea59-7849-4766-94b2-b39dac4fc2c7)
 
 [**Milvus**](https://milvus.io/): Vector database to store embedding vectors. Milvus free community cloud version also (available)[https://cloud.zilliz.com/]<br>
 [**all-MiniLM-L6-v2**](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2): Sentence model used to map sentence and paragraphs in 384 dimensional vector space. This model converts normal sentence to vector embeddings.
