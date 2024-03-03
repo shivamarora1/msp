@@ -47,7 +47,8 @@ make run-streamlit-app
 
 
 ### Demo
-![recording](https://github.com/shivamarora1/msp/assets/28146775/128e700f-7243-450b-b70c-324fe2d49d5d)
+![recording](https://github.com/shivamarora1/msp/assets/28146775/2062628c-834d-4c07-af0b-090be4d2d8c0)
+
 
 
 Follow more such content 👉 : https://medium.com/@shivamarora1
