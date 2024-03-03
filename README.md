@@ -9,15 +9,17 @@ Input: Horror love story
 Result: Terror in the Aisles
 ```
 
+### 👉 Live [Demo](https://movie-search-plot.streamlit.app/)
+
 ### Architecture
 ![msp_architecture](https://github.com/shivamarora1/msp/assets/28146775/9066f40a-09aa-49ea-9751-2dffbc03dfce)
 
-[**Milvus**](https://milvus.io/): Vector database to store embedding vectors. <br>
+[**Milvus**](https://milvus.io/): Vector database to store embedding vectors. Milvus free community cloud version also (available)[https://cloud.zilliz.com/]<br>
 [**all-MiniLM-L6-v2**](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2): Sentence model used to map sentence and paragraphs in 384 dimensional vector space. This model converts normal sentence to vector embeddings.
 
 ### Steps to run project
 1. Run `bash standalone_embed.sh start` to host Milvus database in local.
-2. Set `MILVUS_PORT`, `MILVUS_HOST` in `.env` file with appropriate value.
+2. Set `MILVUS_URI`, `MILVUS_TOKEN` in `.env` file with appropriate value.
 3. Movies dataset
 ```
 Release Year | Title | Origin/Ethnicity | Director | Cast | Genre | Wiki Page | Plot | Image

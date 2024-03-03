@@ -1,10 +1,12 @@
 import streamlit as st
+import random
 from sentence_transformers import SentenceTransformer
 from pymilvus import (connections, Collection)
 import math
+import os
 
-milvus_port = st.secrets["MILVUS_PORT"]
-milvus_host = st.secrets["MILVUS_HOST"]
+MILVUS_TOKEN = os.getenv("MILVUS_TOKEN")
+MILVUS_URI = os.getenv("MILVUS_URI")
 
 
 COLLECTION_NAME = "movies_db"
@@ -14,8 +16,8 @@ COLLECTION_NAME = "movies_db"
 
 @st.cache_resource
 def load_collection():
-    connections.connect(host=milvus_host,
-                        post=milvus_port)
+    connections.connect(uri=MILVUS_URI,
+                        token=MILVUS_TOKEN)
     collection = Collection(COLLECTION_NAME)
     collection.load()
     return collection
@@ -35,7 +37,7 @@ def generate_embeddings(data: list[str]):
 
 @st.cache_data
 def search_data(data: list[str]):
-    top_k = 10
+    top_k = random.randint(10, 40)
     search_embeddings = generate_embeddings(data)
     collection = load_collection()
     resp = collection.search(data=search_embeddings, anns_field="embedding", param={
@@ -94,13 +96,13 @@ if st.session_state.movie_search_result:
             end = min(start+NUM_COLS, len(items))
             i = start
             for cols in st_cols:
+                if i == end:
+                    break
+
                 with cols:
                     with st.container(border=True):
                         st.markdown(f"**{items[i]['title']}**")
                         st.image(f"https://{items[i]['image']}")
-
-                if i == end:
-                    break
                 i = i+1
     else:
         st.error(f"No result found for {query}")

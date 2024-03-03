@@ -1,11 +1,21 @@
-import db
+from pymilvus import (connections, Collection)
+from sentence_transformers import SentenceTransformer
 import csv
 from pymilvus import (
-    connections, utility, FieldSchema, CollectionSchema, DataType, Collection
+    utility, FieldSchema, CollectionSchema, DataType, Collection
 )
+from datasets import load_dataset
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
+
+
+COLLECTION_NAME = "movies_db"
+
+MILVUS_TOKEN = os.getenv("MILVUS_TOKEN")
+MILVUS_URI = os.getenv("MILVUS_URI")
+DIMENSION = 384
 
 
 def csv_load(file):
@@ -17,13 +27,16 @@ def csv_load(file):
             yield (row[1], row[7], row[8])
 
 
-MILVUS_PORT = os.getenv("MILVUS_PORT")
-MILVUS_HOST = os.getenv("MILVUS_HOST")
+transformer = SentenceTransformer("all-MiniLM-L6-v2")
 
-connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 
-COLLECTION_NAME = "movies_db"
-DIMENSION = 384
+def generate_embeddings(data: list[str]):
+    embeddings = transformer.encode(data)
+    return [x for x in embeddings]
+
+
+connections.connect(uri=MILVUS_URI,
+                    token=MILVUS_TOKEN)
 
 if utility.has_collection(collection_name=COLLECTION_NAME):
     utility.drop_collection(collection_name=COLLECTION_NAME)
@@ -46,6 +59,17 @@ index_params = {
 collection.create_index(field_name="embedding", index_params=index_params)
 collection.load()
 
+
+def insert_data(data):
+    embeddings = generate_embeddings(data[1])
+    ins = [
+        data[0],
+        embeddings,
+        data[2],
+    ]
+    collection.insert(ins)
+
+
 BATCH_SIZE = 128
 
 data_batch = [[], [], []]
@@ -57,12 +81,12 @@ for title, plot, image in csv_load('data/plots.csv'):
     data_batch[1].append(plot)
     data_batch[2].append(image)
     if len(data_batch[0]) % BATCH_SIZE == 0:
-        db.insert_data(data_batch)
+        insert_data(data_batch)
         data_batch = [[], [], []]
         print(f"\ninserted... {count} movies")
     count += 1
 
 if len(data_batch[0]) != 0:
-    db.insert_data(data_batch)
+    insert_data(data_batch)
 
 collection.flush()
