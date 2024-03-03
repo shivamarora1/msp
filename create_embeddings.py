@@ -1,5 +1,4 @@
 import db
-import time
 import csv
 from pymilvus import (
     connections, utility, FieldSchema, CollectionSchema, DataType, Collection

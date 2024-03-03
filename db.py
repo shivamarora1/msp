@@ -1,7 +1,6 @@
+from sentence_transformers import SentenceTransformer
 import os
 from pymilvus import (connections, Collection)
-
-import utils
 
 TOP_K = 10
 COLLECTION_NAME = "movies_db"
@@ -13,20 +12,16 @@ collection = Collection(COLLECTION_NAME)
 collection.load()
 
 
-def search_data(data: list[str]):
-    search_embeddings = utils.generate_embeddings(data)
-    resp = collection.search(data=search_embeddings, anns_field="embedding", param={
-                             'metric_type': 'L2', 'params': {'nprobe': 10}}, limit=TOP_K, output_fields=['title', 'image'])
-    result = {}
-    for i, hits in enumerate(resp):
-        result[data[i]] = [{"title": hit.entity.get(
-            'title'), "image": hit.entity.get(
-            'image'), "match": hit.distance} for hit in hits]
-    return result
+transformer = SentenceTransformer("all-MiniLM-L6-v2")
+
+
+def generate_embeddings(data: list[str]):
+    embeddings = transformer.encode(data)
+    return [x for x in embeddings]
 
 
 def insert_data(data):
-    embeddings = utils.generate_embeddings(data[1])
+    embeddings = generate_embeddings(data[1])
     ins = [
         data[0],
         embeddings,
