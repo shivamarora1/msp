@@ -17,7 +17,7 @@ Result: Terror in the Aisles
 
 ### Steps to run project
 1. Run `bash standalone_embed.sh start` to host Milvus database in local.
-2. Set `MILVUS_PORT`, `MILVUS_HOST` in `.env` file with appropriate value.
+2. Set `MILVUS_PORT`, `MILVUS_HOST` in `.streamlit/secrets.toml` file with appropriate value.
 3. Movies dataset
 ```
 Release Year | Title | Origin/Ethnicity | Director | Cast | Genre | Wiki Page | Plot | Image
@@ -39,9 +39,9 @@ python create_embeddings.py
 ``` 
 7. Run application
 ```
-make run-debug
+make run-streamlit-app
 ```
-8. Application running in http://127.0.0.1:3001
+8. Streamlit app should be open in browser
 
 
 ### Demo
