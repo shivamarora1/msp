@@ -17,7 +17,7 @@ Result: Terror in the Aisles
 
 ### Steps to run project
 1. Run `bash standalone_embed.sh start` to host Milvus database in local.
-2. Set `MILVUS_PORT`, `MILVUS_HOST` in `.streamlit/secrets.toml` file with appropriate value.
+2. Set `MILVUS_PORT`, `MILVUS_HOST` in `.env` file with appropriate value.
 3. Movies dataset
 ```
 Release Year | Title | Origin/Ethnicity | Director | Cast | Genre | Wiki Page | Plot | Image
