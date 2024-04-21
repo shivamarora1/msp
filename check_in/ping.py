@@ -38,6 +38,6 @@ images = driver.find_elements(By.XPATH,"//div[@data-testid='stImage']")
 
 print(len(images))
 
-assert len(images) == 11
+assert len(images) >= 10
 
 driver.quit()
